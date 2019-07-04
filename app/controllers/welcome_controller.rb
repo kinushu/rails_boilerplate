@@ -1,7 +1,5 @@
 class WelcomeController < ApplicationController
-
-  def index
-  end
+  def index; end
 
   # def robots
   #   @projects = Project.all_public.active
