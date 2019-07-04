@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 2.5
 
 # hashの最後尾フィールドにも , を有りとする
 Style/TrailingCommaInArrayLiteral:
