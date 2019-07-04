@@ -1,0 +1,114 @@
+AllCops:
+  TargetRubyVersion: 2.6
+
+# hashの最後尾フィールドにも , を有りとする
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+# １行に収まる if 文でも複数行構造でOK
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/RescueModifier:
+  Enabled: false
+
+# 複数戻り値でも return 使用すべき
+Style/RedundantReturn:
+  Enabled: false
+
+# config/app_config.rb:14:7: C: Redundant self detected.
+Style/RedundantSelf:
+  Enabled: false
+
+# app.rb:158:8: C: Use !empty? instead of size > 0.
+#    if @keyword.size > 0
+Style/ZeroLengthPredicate:
+  Enabled: false
+
+# app.rb:324:9: C: Use %w or %W for an array of words.
+Style/WordArray:
+  Enabled: false
+
+# helpers/base.rb:14:28: W: Redundant use of Object#to_s in interpolation.
+Lint/StringConversionInInterpolation:
+  Enabled: false
+
+Style/EmptyElse:
+  EnforcedStyle: empty
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%':  '**'
+
+# Use only ascii symbols in comments.
+Style/AsciiComments:
+  Enabled: false
+
+# Missing top level class documentation comment.
+Style/Documentation:
+  Enabled: false
+
+# Use a guard clause instead of wrapping the code inside a conditional expression.
+# Configuration parameters: MinBodyLength.
+Style/GuardClause:
+  MinBodyLength: 10
+
+#Style/ClassVars:
+
+#Lint/NestedMethodDefinition:
+
+#Lint/ParenthesesAsGroupedExpression:
+
+#Lint/UselessAssignment:
+
+#Style/AccessorMethodName:
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Offense count: 102
+# Configuration parameters: AllowHeredoc, AllowURI, URISchemes.
+# URISchemes: http, https
+Metrics/LineLength:
+  Max: 140
+
+# Offense count: 4
+# Configuration parameters: CountComments.
+Metrics/ClassLength:
+  CountComments: false
+  Max: 300
+
+# Offense count: 3
+# Configuration parameters: CountComments.
+Metrics/ModuleLength:
+  CountComments: false
+  Max: 250
+
+#Style/ConstantName:
+
+# Configuration parameters: CountComments.
+Metrics/MethodLength:
+  CountComments: false
+  Max: 50
+
+# Offense count: 27
+Metrics/AbcSize:
+  Max: 93
+
+# Offense count: 9
+Metrics/CyclomaticComplexity:
+  Max: 14
+
+# Offense count: 9
+Metrics/PerceivedComplexity:
+  Max: 16
+
+# Configuration parameters: CountKeywordArgs.
+Metrics/ParameterLists:
+  Max: 8
