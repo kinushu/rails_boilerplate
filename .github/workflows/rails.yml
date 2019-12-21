@@ -1,0 +1,61 @@
+name: Rails
+
+on: [push]
+env:
+  cache-version: v1
+  RB_APP_TEST_DB_HOST: 127.0.0.1
+  RB_APP_TEST_DB_PORT: 13306
+  RB_APP_TEST_DB_PASS: test12mysql
+  TZ: Asia/Tokyo
+  LOCALE: ja
+  LANG: ja_JP.UTF-8
+  LC_ALL: C.UTF-8
+  LANGUAGE: ja_JP.UTF-8
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
+        ports:
+          - 13306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: test12mysql
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup System
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential mysql-client libmysqlclient-dev libsqlite3-dev nodejs
+      - name: Set up Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+
+      - uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ env.cache-version }}-${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ env.cache-version }}-${{ runner.os }}-gem-
+      - name: Ruby setup
+        run: |
+          gem install bundler --no-document
+      - name: Build and setup
+        env:
+          PRIVATE_REPOS_URL_BASE: ${{ secrets.PRIVATE_REPOS_URL_BASE }}
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3 --deployment
+      - name: DB setup
+        run: |
+          bundle exec rake db:create RAILS_ENV=test
+          bundle exec rake db:migrate RAILS_ENV=test
+          bundle exec rake assets:precompile RAILS_ENV=test
+      - name: Test
+        run: |
+          bundle exec rspec
+          bundle exec rubocop
