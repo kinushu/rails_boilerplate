@@ -48,6 +48,7 @@ jobs:
         env:
           PRIVATE_REPOS_URL_BASE: ${{ secrets.PRIVATE_REPOS_URL_BASE }}
         run: |
+          npm install
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3 --deployment
       - name: DB setup
