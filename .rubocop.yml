@@ -1,5 +1,12 @@
 AllCops:
   TargetRubyVersion: 2.5
+  Exclude:
+    - 'app/views/*/*.jbuilder'
+    - 'vendor/**/*'
+    - 'public/**/*'
+    - 'tmp/**/*'
+    - 'log/**/*'
+    - 'db/schema.rb'
 
 # hashの最後尾フィールドにも , を有りとする
 Style/TrailingCommaInArrayLiteral:
