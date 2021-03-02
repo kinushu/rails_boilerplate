@@ -59,6 +59,6 @@ jobs:
         run: |
           bundle exec rspec
       - uses: r7kamura/rubocop-problem-matchers-action@v1
-#      - name: Lint
-#        run: |
-#          bundle exec rubocop
+      - name: Lint
+        run: |
+          bundle exec rubocop

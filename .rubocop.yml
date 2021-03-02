@@ -43,7 +43,7 @@ Style/WordArray:
   Enabled: false
 
 # helpers/base.rb:14:28: W: Redundant use of Object#to_s in interpolation.
-Lint/StringConversionInInterpolation:
+Lint/RedundantStringCoercion:
   Enabled: false
 
 Style/EmptyElse:
@@ -82,7 +82,7 @@ Style/FrozenStringLiteralComment:
 # Offense count: 102
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes.
 # URISchemes: http, https
-Metrics/LineLength:
+Layout/LineLength:
   Max: 140
 
 # Offense count: 4
