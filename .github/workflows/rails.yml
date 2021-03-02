@@ -1,0 +1,63 @@
+name: Build and Test
+
+on: [push]
+env:
+  cache-version: v1
+  RAILS_BT_APP_TEST_DB_HOST: 127.0.0.1
+  RAILS_BT_APP_TEST_DB_PORT: 23306
+  RAILS_BT_APP_TEST_DB_PASS: mysqlpass
+  TZ: Asia/Tokyo
+  LOCALE: ja
+  LANG: ja_JP.UTF-8
+  LC_ALL: C.UTF-8
+  LANGUAGE: ja_JP.UTF-8
+jobs:
+
+  build:
+    runs-on: ubuntu-18.04
+
+    services:
+      mysql:
+        image: mysql:5.7
+        options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
+        ports:
+          - 23306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: mysqlpass
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup System
+        run: |
+          sudo rm -rf /var/lib/apt/lists/*
+          sudo apt-key adv --refresh-keys --keyserver keyserver.ubuntu.com
+          sudo apt-get update
+          sudo apt-get install -y build-essential mysql-client libmysqlclient-dev libsqlite3-dev nodejs chromium-chromedriver --fix-missing
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+      - uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ env.cache-version }}-${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ env.cache-version }}-${{ runner.os }}-gem-
+      - name: Ruby setup
+        run: |
+          gem install bundler --no-document
+      - name: Build and setup
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+      - name: DB setup
+        run: |
+          bundle exec rake db:create RAILS_ENV=test
+          bundle exec rake db:migrate RAILS_ENV=test
+          bundle exec rake assets:precompile RAILS_ENV=test
+      - name: Test
+        run: |
+          bundle exec rspec
+      - uses: r7kamura/rubocop-problem-matchers-action@v1
+#      - name: Lint
+#        run: |
+#          bundle exec rubocop
