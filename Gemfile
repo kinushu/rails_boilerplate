@@ -44,6 +44,8 @@ group :development do
   gem 'spring-watcher-listen'
 
   gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :test do
@@ -51,3 +53,6 @@ group :test do
   gem 'rspec-rails'
   gem 'simplecov', require: false
 end
+
+gem 'bigdecimal'
+gem 'dotenv-rails'

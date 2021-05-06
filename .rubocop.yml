@@ -66,6 +66,12 @@ Style/Documentation:
 Style/GuardClause:
   MinBodyLength: 10
 
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: nested, compact
+Style/ClassAndModuleChildren:
+  Enabled: false
+
 #Style/ClassVars:
 
 #Lint/NestedMethodDefinition:
@@ -79,19 +85,16 @@ Style/GuardClause:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-# Offense count: 102
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes.
 # URISchemes: http, https
 Layout/LineLength:
   Max: 140
 
-# Offense count: 4
 # Configuration parameters: CountComments.
 Metrics/ClassLength:
   CountComments: false
   Max: 300
 
-# Offense count: 3
 # Configuration parameters: CountComments.
 Metrics/ModuleLength:
   CountComments: false
@@ -104,18 +107,19 @@ Metrics/MethodLength:
   CountComments: false
   Max: 50
 
-# Offense count: 27
 Metrics/AbcSize:
   Max: 93
 
-# Offense count: 9
 Metrics/CyclomaticComplexity:
   Max: 14
 
-# Offense count: 9
 Metrics/PerceivedComplexity:
   Max: 16
 
 # Configuration parameters: CountKeywordArgs.
 Metrics/ParameterLists:
   Max: 8
+
+# Configuration parameters: CountComments, ExcludedMethods.
+Metrics/BlockLength:
+  Max: 150
