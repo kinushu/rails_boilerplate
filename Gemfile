@@ -56,4 +56,5 @@ end
 
 gem 'bigdecimal'
 gem 'etc'
+
 gem 'dotenv-rails'
