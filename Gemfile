@@ -54,7 +54,6 @@ group :test do
   gem 'selenium-webdriver', '~> 3.142.7'
   gem 'webdrivers', '~> 4.6'
 
-
   gem 'database_cleaner'
   gem 'rspec-rails'
 
