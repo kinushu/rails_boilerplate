@@ -50,8 +50,10 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'webdrivers'
+  # バージョンあげると、ローカル、CIで no sessionId in returned payload のエラー出るため、ひとまずバージョン固定
+  gem 'selenium-webdriver', '~> 3.142.7'
+  gem 'webdrivers', '~> 4.6'
+
 
   gem 'database_cleaner'
   gem 'rspec-rails'
