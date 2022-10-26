@@ -63,7 +63,7 @@ end
 
 gem 'bigdecimal'
 gem 'etc'
-gem 'net-smtp', require: false
 gem 'net-pop', require: false
+gem 'net-smtp', require: false
 
 gem 'dotenv-rails'
