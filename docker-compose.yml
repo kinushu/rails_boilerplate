@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: dbrootpass
+  web:
+    build: .
+    environment:
+      RAILS_BT_APP_DEV_DB_HOST: db
+      RAILS_BT_APP_DEV_DB_PORT: 3306
+      RAILS_BT_APP_DEV_DB_PASS: dbrootpass
+      RAILS_BT_APP_TEST_DB_HOST: db
+      RAILS_BT_APP_TEST_DB_PORT: 3306
+      RAILS_BT_APP_TEST_DB_PASS: dbrootpass
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
