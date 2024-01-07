@@ -19,7 +19,11 @@ default: &default
 
 development:
   <<: *default
-  database: rails_bt_2019_development
+  database: <%= ENV.fetch("RAILS_BT_APP_DEV_DB_NAME") { 'rails_bt_2019_development' } %>
+  username: <%= ENV.fetch("RAILS_BT_APP_DEV_DB_USER") { 'root' } %>
+  password: <%= ENV.fetch("RAILS_BT_APP_DEV_DB_PASS") { '' } %>
+  host: <%= ENV.fetch("RAILS_BT_APP_DEV_DB_HOST") { 'localhost' } %>
+  port: <%= ENV.fetch("RAILS_BT_APP_DEV_DB_PORT") { 3306 } %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
